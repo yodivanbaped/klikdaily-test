@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>KlikDaily-Test</title>
+
+	<script type="text/javascript">
+		let questions = ['tikus', 'kerbau', 'harimau', 'kelinci', 'naga', 'ular', 'kuda', 'kambing', 'monyet', 'ayam', 'anjing', 'babi'];
+		let questionIndex = null,
+			tempQuestion = null,
+			tempAnswer = null,
+			tmp = null;
+
+		function init() {
+			questionIndex = Math.floor(Math.random() * 12);
+			tempAnswer = questions[questionIndex];
+			tempQuestion = questions[questionIndex];
+
+			question = shuffle(tempQuestion);
+
+			document.getElementById('question').innerHTML = question;
+		}
+
+		function shuffle(tempQuestion) {
+			tempQuestion = tempQuestion.split("");
+			for(let i = tempQuestion.length - 1; i > 0; i--) {
+		        let j = Math.floor(Math.random() * i);
+		        tmp = tempQuestion[i];
+		        tempQuestion[i] = tempQuestion[j];
+		        tempQuestion[j] = tmp;
+		    }
+
+		    return tempQuestion.join("");
+		}
+
+		function check() {
+			if (document.getElementById('answer').value == '') {
+				document.getElementById('check').innerHTML = 'ANSWER IS EMPTY';
+			} else if (document.getElementById('answer').value !== tempAnswer) {
+				document.getElementById('check').innerHTML = 'WRONG ANSWER';
+			} else {
+				document.getElementById('check').innerHTML = 'CORRECT ANSWER';
+				init();
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<button onclick="init()">Get Question</button> <br>	
+	Kata acak: <label id="question"></label> <br>
+	Jawaban: <input type="text" id="answer" name="answer"> <br>
+	<button onclick="check()">Check</button>
+	<label id="check"></label>
+</body>
+</html>
